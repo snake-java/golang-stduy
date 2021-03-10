@@ -1,0 +1,9 @@
+{
+    "go.languageServerExperimentalFeatures": {
+
+        "diagnostics": true
+    }
+    ,"go.testFlags": ["-v"],
+}
+
+}
