@@ -50,3 +50,48 @@ func TestSlice(t *testing.T) {
 	t.Log(a[2:len(a)])
 
 }
+
+func TestArrayLenth(t *testing.T) {
+	//切片的定义,len所处的单元格都会为0
+	s2 := make([]int, 3, 5)
+	t.Log(len(s2), cap(s2)) //3 5
+}
+
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 1 1
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 2 2
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 3 4
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 4 4
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 5 8
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 6 8
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 7 8
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 8 8
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 9 16
+// d:\study\golang\golang-stduy\src\demo6\arrayandSlice_test.go:64: 10 16
+func TestSeliceGrowing(t *testing.T) {
+	s := []int{}
+	for i := 0; i < 10; i++ {
+		//变为了一个新连续存储空间
+		s = append(s, i)
+		t.Log(len(s), cap(s))
+	}
+
+}
+
+//修改切片会 影响原切片
+func TestSliceShareMemory(t *testing.T) {
+	year := []string{"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
+	Q2 := year[3:6]
+	t.Log(Q2)               //Apr May Jun
+	t.Log(len(Q2), cap(Q2)) //3 9
+	summer := year[5:8]
+	t.Log(summer)                   //Jun Jul Aug]
+	t.Log(len(summer), cap(summer)) //3 7
+	summer[0] = "nn"
+	t.Log(Q2) //[Apr May nn]
+}
+
+func TestSliceCompare(t *testing.T) {
+	a := []int{1, 2, 3, 4}
+	b := []int{1, 2, 3, 4}
+	// t.Log(a == b) //slice can only be compared to nil
+}
